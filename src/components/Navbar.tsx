@@ -98,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 md:gap-8">
           
-          {/* Logo - Extra Large and Clean */}
+          {/* Logo - Perfectly Balanced */}
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -108,23 +108,23 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src={LOGO_URL}
               alt="Psicoterapia con Janis"
-              className="h-18 sm:h-22 md:h-26 lg:h-28 w-auto object-contain transition-all drop-shadow-md"
+              className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto object-contain transition-all drop-shadow-sm"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = 'none';
                 const parent = target.parentElement;
                 if (parent && !parent.querySelector('.fallback-logo')) {
                   const fallback = document.createElement('div');
-                  fallback.className = 'fallback-logo flex items-center gap-2 font-serif text-2xl font-bold text-[#1E3A8A]';
-                  fallback.innerHTML = `<span class="text-3xl text-[#D6567F]">♥</span><span>Psicoterapia <span class="text-[#D6567F] font-script text-3xl font-normal">con Janis</span></span>`;
+                  fallback.className = 'fallback-logo flex items-center gap-2 font-serif text-xl font-bold text-[#1E3A8A]';
+                  fallback.innerHTML = `<span class="text-2xl text-[#D6567F]">♥</span><span>Psicoterapia <span class="text-[#D6567F] font-script text-2xl font-normal">con Janis</span></span>`;
                   parent.appendChild(fallback);
                 }
               }}
             />
           </Link>
 
-          {/* Desktop Navigation Links (Clean Typography without capsule background) */}
-          <nav className="hidden lg:flex items-center gap-7 xl:gap-9 text-[15px] font-semibold text-[#1E3A8A]">
+          {/* Desktop Navigation Links (Compact & Refined Typography) */}
+          <nav className="hidden lg:flex items-center gap-3.5 xl:gap-5 text-[12.5px] font-semibold text-[#1E3A8A]">
             {navLinks.map((link) => {
               const active = isCurrentActive(link);
               return link.isRoute ? (

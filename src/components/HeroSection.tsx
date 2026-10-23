@@ -9,68 +9,72 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onAgendarClick }) => {
   return (
     <section 
       id="hero" 
-      className="relative isolate overflow-hidden min-h-[92vh] sm:min-h-[96vh] pt-36 sm:pt-48 md:pt-56 lg:pt-60 pb-36 sm:pb-48 md:pb-56 flex items-center bg-[#F8FAFD]"
+      className="relative isolate overflow-hidden min-h-[85vh] sm:min-h-[96vh] pt-28 sm:pt-48 md:pt-56 lg:pt-60 pb-28 sm:pb-48 md:pb-56 flex items-center bg-[#F8FAFD]"
     >
       {/* 
         HERO BACKGROUND IMAGE:
         User requested: https://i.postimg.cc/LXPn2Ns5/Mujer-sonriente-senalando-espacio-luminoso.png
         Original image without opacity reduction. 
-        Adjusted object positioning (object-[65%_center] / object-center) so the woman is perfectly framed.
+        Object positioning (object-[85%_center] on mobile, sm:object-[88%_center], lg:object-[92%_center]) keeps the smiling woman framed on the right across all screen sizes.
       */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
           src="https://i.postimg.cc/LXPn2Ns5/Mujer-sonriente-senalando-espacio-luminoso.png"
           alt="Psicoterapia y Bienestar Emocional con Janis"
-          className="w-full h-full object-cover object-right sm:object-[88%_center] lg:object-[92%_center]"
+          className="w-full h-full object-cover object-[85%_center] sm:object-[88%_center] lg:object-[92%_center]"
         />
         {/* Soft white top gradient overlay for smooth, gentle header blending */}
-        <div className="absolute top-0 inset-x-0 h-48 sm:h-64 bg-gradient-to-b from-[#F8FAFD] via-[#F8FAFD]/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 inset-x-0 h-36 sm:h-64 bg-gradient-to-b from-[#F8FAFD] via-[#F8FAFD]/80 to-transparent pointer-events-none z-10" />
       </div>
 
-      {/* Hero Content directly over background (NO box/card background behind text) */}
+      {/* Hero Content directly over background */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          {/* Headlines & Copy directly without card container */}
-          <div className="lg:col-span-8 xl:col-span-7 text-left space-y-7">
+          {/* Headlines & Copy with soft ambient white gradient layer for maximum contrast */}
+          {/* Mobile layout keeps text constrained to the left 70% so woman remains framed on the right */}
+          <div className="lg:col-span-8 xl:col-span-7 max-w-[72%] sm:max-w-xl lg:max-w-none text-left space-y-3 sm:space-y-5 relative">
             
-            {/* Main Headline */}
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.3rem] xl:text-[3.7rem] font-bold tracking-tight leading-[1.14] text-[#1E3A8A] drop-shadow-[0_1px_3px_rgba(255,255,255,0.95)]">
+            {/* Soft ambient white gradient overlay directly under text column */}
+            <div className="absolute -inset-3 sm:-inset-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#F8FAFD]/95 via-[#F8FAFD]/85 to-[#F8FAFD]/10 backdrop-blur-[2px] pointer-events-none -z-10" />
+
+            {/* Main Headline (Refined & Minimalized, scaled for mobile) */}
+            <h1 className="font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.6rem] xl:text-[2.9rem] font-bold tracking-tight leading-[1.18] sm:leading-[1.16] text-[#1E3A8A]">
               Sostienes el mundo <br className="hidden sm:inline" />
               de todos, pero... <br />
-              <span className="text-[#D6567F] italic font-medium inline-block mt-1.5">
+              <span className="text-[#D6567F] italic font-medium inline-block mt-0.5 sm:mt-1">
                 ¿quién sostiene tu sistema nervioso?
               </span>
             </h1>
 
             {/* Paragraph 1 */}
-            <p className="text-base sm:text-lg md:text-xl text-[#1E3A8A] font-semibold leading-relaxed max-w-xl drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+            <p className="text-[11px] sm:text-base md:text-lg text-[#1E3A8A] font-semibold leading-snug sm:leading-relaxed max-w-lg">
               Psicoterapia especializada en trauma somático, regulación emocional y vínculos sanos para individuos y parejas.
             </p>
 
             {/* Paragraph 2 */}
-            <p className="text-sm sm:text-base md:text-[17px] text-[#2D3748] leading-relaxed max-w-xl font-normal drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+            <p className="text-[10px] sm:text-sm md:text-[15px] text-[#2D3748] leading-snug sm:leading-relaxed max-w-lg font-normal">
               Un espacio seguro para soltar la coraza, dejar de sobrevivir y aprender a relacionarte desde la paz, no desde el miedo.
             </p>
 
             {/* CTA Button and Script Tagline */}
-            <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-7">
               <button
                 type="button"
                 onClick={onAgendarClick}
-                className="inline-flex items-center gap-3 px-8 sm:px-9 py-4 rounded-full text-white font-semibold text-sm sm:text-base btn-primary-gradient shadow-xl hover:shadow-2xl group transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3.5 py-2 sm:px-7 sm:py-3.5 rounded-full text-white font-semibold text-[11px] sm:text-sm btn-primary-gradient shadow-md hover:shadow-xl group transition-all cursor-pointer whitespace-nowrap"
               >
                 <span>Quiero agendar mi primera sesión</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
               </button>
 
               {/* Hand-written script text with brush underline */}
-              <div className="relative inline-block rotate-[-3deg] pl-2">
-                <span className="font-script text-2xl sm:text-3xl lg:text-4xl text-[#1E3A8A] font-semibold tracking-wide drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]">
+              <div className="relative inline-block rotate-[-3deg] pl-0.5 sm:pl-1">
+                <span className="font-script text-sm sm:text-2xl lg:text-3xl text-[#1E3A8A] font-semibold tracking-wide">
                   Tu bienestar también importa
                 </span>
                 <svg
-                  className="absolute -bottom-2 left-0 w-full h-3.5 text-[#D6567F]"
+                  className="absolute -bottom-1 left-0 w-full h-2 sm:h-3 text-[#D6567F]"
                   viewBox="0 0 250 12"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
