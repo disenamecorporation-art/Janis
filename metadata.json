@@ -1,0 +1,6 @@
+{
+  "name": "Psicoterapia con Janis",
+  "description": "Psicoterapia clínica especializada en trauma somático, regulación emocional y terapia de pareja en Caracas, Venezuela.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
