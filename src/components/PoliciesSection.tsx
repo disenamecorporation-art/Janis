@@ -16,7 +16,7 @@ export const PoliciesSection: React.FC = () => {
     {
       icon: Clock,
       title: "Vigencia:",
-      description: "Los planes mensuales tienen una vigencia estricta de 30 días continuos.",
+      description: "Los planes mensuales tienen una vigencia de 30 días continuos.",
     },
   ];
 

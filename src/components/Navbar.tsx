@@ -55,12 +55,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const handleAgendarAction = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
-    if (location.pathname === '/formulario') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setIsOpen(false);
-      return;
+    if (onOpenAgendar) {
+      onOpenAgendar();
+    } else {
+      navigate('/');
     }
-    navigate('/formulario');
     setIsOpen(false);
   };
 

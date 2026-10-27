@@ -69,11 +69,11 @@ export const ClinicalResultsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Clasped hands photo with soft curved/faded blend */}
+          {/* Right Column: Photo with soft curved/faded blend */}
           <div className="lg:col-span-5 relative flex justify-center">
             <div className="relative w-full max-w-md aspect-[4/3] sm:aspect-[4/4] rounded-3xl overflow-hidden shadow-xl">
               <img
-                src="/src/assets/images/clasped_hands_therapy_1792597387293.jpg"
+                src="https://i.postimg.cc/xCdgLkC4/image.png"
                 alt="Manos entrelazadas en sesión de terapia clínica"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
               />

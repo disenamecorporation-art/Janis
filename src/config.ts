@@ -12,8 +12,8 @@ export const PAYPAL_CLIENT_ID = "TU_CLIENT_ID_AQUI";
 export const GUIDE_PRICE = "15";
 
 // 3. NÚMERO DE WHATSAPP PARA CONTACTO Y AGENDAMIENTO
-// Formato internacional sin símbolos: 58 (código Venezuela) seguido de tu número (ej: 584121234567)
-export const WHATSAPP_NUMBER = "584121234567";
+// Formato internacional sin símbolos: 58 (código Venezuela) seguido de tu número (ej: 584249516897)
+export const WHATSAPP_NUMBER = "584249516897";
 
 // Enlace directo a WhatsApp con mensaje personalizado
 export const getWhatsAppUrl = (message?: string) => {

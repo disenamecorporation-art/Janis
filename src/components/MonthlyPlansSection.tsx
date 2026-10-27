@@ -4,20 +4,21 @@ import { getWhatsAppUrl } from '../config';
 import { CheckoutItem } from './PayPalCheckoutModal';
 
 interface MonthlyPlansSectionProps {
-  onSelectPlanForPayPal: (item: CheckoutItem) => void;
+  onSelectPlanForPayPal?: (item: CheckoutItem) => void;
+  onOpenBooking?: (service?: 'Terapia Individual' | 'Terapia de Pareja') => void;
 }
 
-export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSelectPlanForPayPal }) => {
+export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSelectPlanForPayPal, onOpenBooking }) => {
   const individualPlanItem: CheckoutItem = {
     id: 'plan-individual',
     title: 'Plan Mensual Terapia Individual',
     subtitle: '4 sesiones clínicas personalizadas (50 min)',
-    price: '150',
+    price: '170',
     currency: 'USD',
     features: [
       '4 sesiones individuales de 50 minutos',
       'Enfoque integrado (EMDR, IFS, somático)',
-      'Vigencia estricta de 30 días continuos',
+      'Vigencia de 30 días continuos',
       'Atención presencial en Caracas u Online',
     ],
   };
@@ -31,7 +32,7 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
     features: [
       '4 sesiones de pareja especializadas',
       'Reparación de patrones de apego y comunicación',
-      'Vigencia estricta de 30 días continuos',
+      'Vigencia de 30 días continuos',
       'Atención presencial en Caracas u Online',
     ],
   };
@@ -88,12 +89,12 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
                     </span>
                     <div className="flex items-baseline gap-1 my-2">
                       <span className="text-3xl sm:text-4xl font-extrabold font-serif text-[#1E3A8A]">
-                        $150
+                        $170
                       </span>
                       <span className="text-xs text-slate-500 font-medium">USD</span>
                     </div>
                     <p className="text-[11px] text-slate-500 leading-tight">
-                      4 sesiones completas al mes ($37.5 / sesión).
+                      4 sesiones completas al mes ($42.5 / sesión).
                     </p>
                   </div>
 
@@ -101,11 +102,17 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
                   <div className="mt-4 pt-3 border-t border-slate-100">
                     <button
                       type="button"
-                      onClick={() => onSelectPlanForPayPal(individualPlanItem)}
-                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold text-[#003087] bg-white/90 hover:bg-white border border-slate-200 shadow-sm hover:shadow transition-all"
+                      onClick={() => {
+                        if (onOpenBooking) {
+                          onOpenBooking('Terapia Individual');
+                        } else if (onSelectPlanForPayPal) {
+                          onSelectPlanForPayPal(individualPlanItem);
+                        }
+                      }}
+                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold text-[#003087] bg-white/90 hover:bg-white border border-slate-200 shadow-sm hover:shadow transition-all cursor-pointer"
                     >
                       <span className="font-extrabold italic text-sm text-[#003087]">Pay<span className="text-[#0079C1]">Pal</span></span>
-                      <span>· Pagar $150</span>
+                      <span>· Pagar $170</span>
                     </button>
                   </div>
                 </div>
@@ -154,7 +161,7 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#2F5BD6]" />
-                  <span>Vigencia estricta de 30 días continuos</span>
+                  <span>Vigencia de 30 días continuos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
@@ -165,15 +172,20 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
 
             {/* Gradient Primary Button */}
             <div className="pt-2">
-              <a
-                href={getWhatsAppUrl("Hola Janis, quiero reservar mi espacio mensual para Terapia Individual.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full text-white font-medium text-sm btn-primary-gradient shadow-md hover:shadow-lg transition-all"
+              <button
+                type="button"
+                onClick={() => {
+                  if (onOpenBooking) {
+                    onOpenBooking('Terapia Individual');
+                  } else {
+                    window.open(getWhatsAppUrl("Hola Janis, quiero reservar mi espacio mensual para Terapia Individual."), "_blank");
+                  }
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full text-white font-medium text-sm btn-primary-gradient shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <span>Reservar mi espacio mensual</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -219,8 +231,14 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
                   <div className="mt-4 pt-3 border-t border-slate-100">
                     <button
                       type="button"
-                      onClick={() => onSelectPlanForPayPal(couplePlanItem)}
-                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold text-[#003087] bg-white/90 hover:bg-white border border-slate-200 shadow-sm hover:shadow transition-all"
+                      onClick={() => {
+                        if (onOpenBooking) {
+                          onOpenBooking('Terapia de Pareja');
+                        } else if (onSelectPlanForPayPal) {
+                          onSelectPlanForPayPal(couplePlanItem);
+                        }
+                      }}
+                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold text-[#003087] bg-white/90 hover:bg-white border border-slate-200 shadow-sm hover:shadow transition-all cursor-pointer"
                     >
                       <span className="font-extrabold italic text-sm text-[#003087]">Pay<span className="text-[#0079C1]">Pal</span></span>
                       <span>· Pagar $210</span>
@@ -272,7 +290,7 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#2F5BD6]" />
-                  <span>Vigencia estricta de 30 días continuos</span>
+                  <span>Vigencia de 30 días continuos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
@@ -283,15 +301,20 @@ export const MonthlyPlansSection: React.FC<MonthlyPlansSectionProps> = ({ onSele
 
             {/* Gradient Primary Button */}
             <div className="pt-2">
-              <a
-                href={getWhatsAppUrl("Hola Janis, queremos reservar nuestro espacio mensual de Terapia de Pareja.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full text-white font-medium text-sm btn-primary-gradient shadow-md hover:shadow-lg transition-all"
+              <button
+                type="button"
+                onClick={() => {
+                  if (onOpenBooking) {
+                    onOpenBooking('Terapia de Pareja');
+                  } else {
+                    window.open(getWhatsAppUrl("Hola Janis, queremos reservar nuestro espacio mensual de Terapia de Pareja."), "_blank");
+                  }
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full text-white font-medium text-sm btn-primary-gradient shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <span>Reservar mi espacio mensual</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           </div>
 

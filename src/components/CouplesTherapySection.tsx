@@ -39,7 +39,7 @@ export const CouplesTherapySection: React.FC<CouplesTherapySectionProps> = ({ on
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] lg:aspect-[4/5] max-w-lg mx-auto">
               <img
-                src="/src/assets/images/couple_therapy_1792597385767.jpg"
+                src="https://i.postimg.cc/j5vmb0wR/image.png"
                 alt="Pareja en terapia de reconexión y afecto"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
               />

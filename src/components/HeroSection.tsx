@@ -33,7 +33,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onAgendarClick }) => {
           
           {/* Headlines & Copy with soft ambient white gradient layer for maximum contrast */}
           {/* Mobile layout keeps text constrained to the left 70% so woman remains framed on the right */}
-          <div className="lg:col-span-8 xl:col-span-7 max-w-[72%] sm:max-w-xl lg:max-w-none text-left space-y-3 sm:space-y-5 relative">
+          <div className="lg:col-span-8 xl:col-span-7 max-w-full sm:max-w-xl lg:max-w-none text-left space-y-3 sm:space-y-5 relative">
             
             {/* Soft ambient white gradient overlay directly under text column */}
             <div className="absolute -inset-3 sm:-inset-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#F8FAFD]/95 via-[#F8FAFD]/85 to-[#F8FAFD]/10 backdrop-blur-[2px] pointer-events-none -z-10" />

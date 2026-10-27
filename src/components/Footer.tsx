@@ -111,14 +111,19 @@ export const Footer: React.FC = () => {
 
         {/* Bottom row: copyright info and script quote */}
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div className="text-center md:text-left">
-            <span>Psicoterapia con Janis</span>
-            <span className="mx-2">|</span>
-            <span>Caracas, Venezuela</span>
-            <span className="mx-2">|</span>
-            <a href="https://www.psicoterapiaconjanis.com" className="hover:text-[#1E3A8A] transition-colors">
-              {CLINIC_INFO.website}
-            </a>
+          <div className="text-center md:text-left space-y-1">
+            <div>
+              <span>Psicoterapia con Janis</span>
+              <span className="mx-2">|</span>
+              <span>Caracas, Venezuela</span>
+              <span className="mx-2">|</span>
+              <a href="https://www.psicoterapiaconjanis.com" className="hover:text-[#1E3A8A] transition-colors">
+                {CLINIC_INFO.website}
+              </a>
+            </div>
+            <div className="text-[11px] text-slate-400">
+              Hecho por <span className="font-semibold text-slate-600">Legaint Corporation</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-2 font-script text-xl md:text-2xl text-[#1E3A8A]">
