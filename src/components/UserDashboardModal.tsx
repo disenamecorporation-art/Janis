@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   X, User, Mail, Lock, Phone, Calendar, Clock, CheckCircle2, 
-  AlertCircle, LogOut, ArrowRight, ShieldCheck, MapPin, Video 
+  AlertCircle, LogOut, ArrowRight, ShieldCheck, MapPin, Video, FileText 
 } from 'lucide-react';
 import { dbService, User as UserModel, Appointment } from '../services/db';
 
@@ -16,6 +17,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
   onClose,
   onOpenAgendar
 }) => {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<UserModel | null>(dbService.getCurrentUser());
   const [activeTab, setActiveTab] = useState<'citas' | 'seguridad' | 'perfil'>('citas');
   
@@ -157,6 +159,32 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Cerrar Sesión</span>
+          </button>
+        </div>
+
+        {/* Banner para Llenar Formulario Clínico de Admisión */}
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50/90 via-purple-50/70 to-pink-50/90 border border-blue-100 shadow-sm mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <FileText className="w-4.5 h-4.5 text-[#2F5BD6]" />
+              <span className="font-serif font-bold text-sm text-[#1E3A8A]">
+                Cuestionario Clínico de Admisión
+              </span>
+            </div>
+            <p className="text-xs text-slate-500">
+              Completa tu ficha antes de la sesión para resguardar tus datos y necesidades.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              navigate('/formulario');
+            }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white btn-primary-gradient shadow hover:shadow-md transition-all shrink-0 cursor-pointer"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Llenar el formulario</span>
           </button>
         </div>
 

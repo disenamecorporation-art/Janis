@@ -40,7 +40,7 @@ export const GuideBannerSection: React.FC<GuideBannerSectionProps> = ({ onBuyGui
               <div className="relative group perspective-1000">
                 <div className="w-48 sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl transform rotate-[-4deg] group-hover:rotate-0 transition-all duration-500 ring-1 ring-black/5 bg-white">
                   <img
-                    src="https://i.postimg.cc/GmXVs13D/image.png"
+                    src="https://i.postimg.cc/T2HxxXmd/Guia-de-Regulacion-del-Sistema-Nervioso.png"
                     alt="Portada Guía Práctica Entendiendo tu Sistema Nervioso"
                     className="w-full h-full object-cover"
                   />

@@ -47,7 +47,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'Terapia Individual', href: '#individual', route: '/' },
     { name: 'Terapia de Pareja', href: '#pareja', route: '/' },
     { name: 'Planes', href: '#planes', route: '/' },
-    { name: 'Formulario', href: '/formulario', isRoute: true },
     { name: 'Blog', href: '/blog', isRoute: true },
     { name: 'Sobre mí', href: '#sobre-mi', route: '/' },
     { name: 'Contacto', href: '#contacto', route: '/' },
