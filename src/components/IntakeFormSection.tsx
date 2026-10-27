@@ -331,21 +331,21 @@ export const IntakeFormSection: React.FC = () => {
   return (
     <section 
       id="formulario" 
-      className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#F8FAFD] via-[#EEF4FB] to-[#F8FAFD]"
+      className="relative py-20 sm:py-32 px-3 sm:px-6 lg:px-8 bg-gradient-to-b from-[#F8FAFD] via-[#EEF4FB] to-[#F8FAFD] overflow-x-hidden"
     >
       {/* Decorative ambient blurred orbs matching site palette */}
       <div className="absolute top-1/4 -left-36 w-96 h-96 rounded-full bg-[#D6567F]/10 blur-[100px] pointer-events-none -z-10 overflow-hidden" />
       <div className="absolute bottom-1/4 -right-36 w-96 h-96 rounded-full bg-[#2F5BD6]/10 blur-[100px] pointer-events-none -z-10 overflow-hidden" />
 
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto w-full">
         
         {/* ENCABEZADO DE LA SECCIÓN */}
-        <div className="text-center mb-10 sm:mb-14 space-y-4">
-          <h2 className="font-montserrat font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1E3A8A] tracking-wide leading-tight">
+        <div className="text-center mb-8 sm:mb-14 space-y-3 sm:space-y-4">
+          <h2 className="font-montserrat font-light text-xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1E3A8A] tracking-wide leading-tight px-2">
             Bienvenido/a a Psicoterapia con Janis
           </h2>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-[#4B5675] leading-relaxed">
+          <p className="max-w-2xl mx-auto text-xs sm:text-base text-[#4B5675] leading-relaxed px-2">
             Este formulario me ayuda a conocerte un poco antes de nuestra sesión, todos los datos proporcionados estarán a mi resguardo. Solo se utilizarán para ver tus necesidades y suministrarte información relevante del servicio de psicoterapia acorde con ellas.
           </p>
 
@@ -356,7 +356,7 @@ export const IntakeFormSection: React.FC = () => {
 
         {/* SI YA SE ENVIÓ CON ÉXITO: Mensaje de agradecimiento solicitado */}
         {submitted ? (
-          <div className="glass-card rounded-[32px] p-8 sm:p-14 text-center space-y-6 shadow-2xl border border-white/95 animate-in fade-in zoom-in-95 duration-300">
+          <div className="glass-card rounded-[28px] p-6 sm:p-14 text-center space-y-6 shadow-2xl border border-white/95 animate-in fade-in zoom-in-95 duration-300">
             <div className="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-inner ring-8 ring-emerald-50/60">
               <CheckCircle2 className="w-10 h-10" />
             </div>
@@ -395,13 +395,13 @@ export const IntakeFormSection: React.FC = () => {
           </div>
         ) : (
           /* FORMULARIO COMPLETO */
-          <form onSubmit={handleSubmit} noValidate className="space-y-8">
+          <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-8">
             
             {/* BARRA DE PROGRESO SIEMPRE VISIBLE AL SCROLL (STICKY) */}
-            <div className="sticky top-16 sm:top-20 z-30 glass-card rounded-2xl p-4 sm:p-5 shadow-xl border border-white/95 backdrop-blur-xl transition-all">
-              <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-[#1E3A8A] mb-2">
+            <div className="sticky top-16 sm:top-20 z-30 glass-card rounded-2xl p-3.5 sm:p-5 shadow-xl border border-white/95 backdrop-blur-xl transition-all">
+              <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-[#1E3A8A] mb-1.5 sm:mb-2">
                 <span>Progreso del Cuestionario</span>
-                <span className="text-[#D6567F] font-bold">
+                <span className="text-[#D6567F] font-bold text-xs sm:text-sm">
                   {progressCount} de 26 preguntas ({progressPercent}%)
                 </span>
               </div>
@@ -414,7 +414,7 @@ export const IntakeFormSection: React.FC = () => {
             </div>
 
             {/* SECCIÓN 1: DATOS BÁSICOS Y DEMOGRÁFICOS */}
-            <div className="glass-card rounded-[28px] p-6 sm:p-8 space-y-6 shadow-xl border border-white/95">
+            <div className="glass-card rounded-[24px] sm:rounded-[28px] p-4 sm:p-8 space-y-6 shadow-xl border border-white/95 max-w-full">
               <div className="border-b border-slate-200/80 pb-3">
                 <h3 className="font-serif text-lg sm:text-xl font-bold text-[#1E3A8A]">
                   Datos de Contacto y Personales
@@ -1128,8 +1128,8 @@ export const IntakeFormSection: React.FC = () => {
                 </label>
                 
                 {/* Botones circulares seleccionables del 1 al 10 */}
-                <div className="pt-2 pb-1">
-                  <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+                <div className="pt-2 pb-1 max-w-full overflow-x-auto scrollbar-none">
+                  <div className="flex items-center justify-between gap-1 sm:gap-2 min-w-[300px] sm:min-w-0">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => {
                       const isSelected = formData.intensidadDel1Al10 === num;
                       return (
@@ -1137,7 +1137,7 @@ export const IntakeFormSection: React.FC = () => {
                           key={num}
                           type="button"
                           onClick={() => handleChange('intensidadDel1Al10', num)}
-                          className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center transition-all cursor-pointer transform hover:scale-105 ${
+                          className={`w-7 h-7 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center shrink-0 transition-all cursor-pointer transform hover:scale-105 ${
                             isSelected
                               ? 'bg-[#1E3A8A] text-white shadow-lg ring-4 ring-[#2F5BD6]/30 scale-110'
                               : 'bg-white/90 text-slate-700 hover:bg-[#EEF4FB] border border-slate-200 shadow-sm'
@@ -1150,17 +1150,17 @@ export const IntakeFormSection: React.FC = () => {
                   </div>
 
                   {/* Etiquetas de los extremos */}
-                  <div className="flex items-center justify-between text-[11px] sm:text-xs font-semibold text-slate-500 mt-3 px-1">
+                  <div className="flex items-center justify-between text-[10px] sm:text-xs font-semibold text-slate-500 mt-3 px-1">
                     <span className="flex items-center gap-1 text-slate-500">
-                      ← 1 (Baja intensidad)
+                      ← 1 (Baja)
                     </span>
                     {formData.intensidadDel1Al10 > 0 && (
                       <span className="text-[#D6567F] font-bold">
-                        Seleccionado: {formData.intensidadDel1Al10} / 10
+                        {formData.intensidadDel1Al10} / 10
                       </span>
                     )}
                     <span className="flex items-center gap-1 text-slate-500">
-                      10 (Muy alta intensidad) →
+                      10 (Muy alta) →
                     </span>
                   </div>
                 </div>

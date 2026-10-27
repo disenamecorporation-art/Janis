@@ -10,7 +10,7 @@ export const FormularioPage: React.FC = () => {
   }, []);
 
   return (
-    <main className="min-h-screen pt-24 pb-16 bg-[#F8FAFD]">
+    <main className="min-h-screen pt-20 sm:pt-24 pb-16 bg-[#F8FAFD] overflow-x-hidden w-full max-w-full">
       {/* Top Breadcrumb & Navigation helper */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
         <div className="flex items-center justify-between text-xs sm:text-sm">

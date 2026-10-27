@@ -19,7 +19,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Sistema nervioso",
     date: "14 Oct 2026",
     readTime: "5 min de lectura",
-    imageUrl: "/src/assets/images/blog_nervous_system_1792597406633.jpg",
+    imageUrl: "https://i.postimg.cc/fLp8fw1W/image.png",
     content: [
       "¿Te ha pasado alguna vez que, aun estando en la comodidad de tu casa, con todas las tareas del día cumplidas y sin ningún peligro evidente, tu pecho sigue apretado, tu respiración es superficial y sientes una urgencia inexplicable de estar alerta?",
       "Muchas personas interpretan este estado como un fallo personal o una señal de 'debilidad emocional'. Sin embargo, desde la perspectiva de la neurobiología y la psicoterapia clínica, la realidad es muy distinta: tu sistema nervioso no está roto, está cumpliendo diligentemente con un programa de supervivencia que quedó fijado en el pasado.",
@@ -36,7 +36,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Trauma somático",
     date: "8 Oct 2026",
     readTime: "6 min de lectura",
-    imageUrl: "/src/assets/images/blog_somatic_trauma_1792597408054.jpg",
+    imageUrl: "https://i.postimg.cc/xCdgLkC4/image.png",
     content: [
       "Solemos creer que el trauma es un evento extraordinario y catastrófico guardado en forma de recuerdos nítidos en la memoria episódica. No obstante, las investigaciones contemporáneas en psicología del trauma demuestran que el trauma es, ante todo, una respuesta inconclusa en el cuerpo físico.",
       "Cuando experimentamos una sobrecarga emocional o relacional sin el sostén necesario para regularnos, el impulso instintivo del organismo queda truncado. La contracción muscular que preparaba la defensa, el nudo en la garganta que reprimió un llanto o el congelamiento visceral ante la desprotección permanecen activos en los tejidos fasciales y neuromusculares.",
@@ -52,7 +52,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Apego",
     date: "29 Sep 2026",
     readTime: "6 min de lectura",
-    imageUrl: "/src/assets/images/blog_attachment_styles_1792597407234.jpg",
+    imageUrl: "https://i.postimg.cc/j5vmb0wR/image.png",
     content: [
       "En terapia de pareja, una de las dinámicas más frecuentes y desgastantes es el ciclo entre un estilo de apego ansioso y uno evitativo. Ambos miembros se aman profundamente, pero sus discusiones parecen seguir un guion prediseñado del cual no logran escapar.",
       "Para la persona con tendencias ansiosas, cualquier atisbo de distancia física o frialdad emocional activa una alarma de abandono inmediata. El sistema nervioso entra en simpatía acelerada: surge la necesidad urgente de explicaciones, llamadas reiteradas, preguntas inquisitivas o reproches. Su lema inconsciente es: 'si no te mantengo cerca, te perderé'.",
@@ -68,7 +68,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Límites y autocuidado",
     date: "19 Sep 2026",
     readTime: "5 min de lectura",
-    imageUrl: "/src/assets/images/blog_setting_boundaries_1792597408038.jpg",
+    imageUrl: "https://i.postimg.cc/GmXVs13D/image.png",
     content: [
       "Decir 'no puedo este fin de semana', 'necesito descansar' o 'ese tono de voz me incomoda' despierta en muchas personas un oleaje instantáneo de remordimiento, angustia y miedo al rechazo. Preferimos asumir responsabilidades ajenas antes que tolerar la incomodidad de un límite honesto.",
       "Esta culpa no es una señal de que estés haciendo algo malo; es el residuo emocional de haber aprendido, en etapas tempranas del desarrollo, que tu valor y pertenencia dependían de ser complaciente, útil y fácil de complacer.",
@@ -84,7 +84,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Pareja",
     date: "10 Sep 2026",
     readTime: "5 min de lectura",
-    imageUrl: "/src/assets/images/blog_couple_distance_1792597409033.jpg",
+    imageUrl: "https://i.postimg.cc/j5vmb0wR/image.png",
     content: [
       "Existe un mito dañino según el cual la terapia de pareja es el último recurso antes de la firma de una separación definitiva. En realidad, esperar a que los cuatro jinetes del apocalipsis relacional (crítica, desprecio, actitud defensiva y aislamiento) hayan erosionado la base de la relación dificulta innecesariamente el proceso.",
       "Una de las señales más claras de que es momento de buscar acompañamiento profesional es cuando las discusiones dejan de tener como objetivo resolver un problema y se convierten en batallas por tener la razón. El desgaste de repetir la misma disputa circular mes tras mes agota los recursos de cualquier vínculo.",
@@ -100,7 +100,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Límites y autocuidado",
     date: "1 Sep 2026",
     readTime: "6 min de lectura",
-    imageUrl: "/src/assets/images/blog_exhaustion_strong_1792597409060.jpg",
+    imageUrl: "https://i.postimg.cc/fLp8fw1W/image.png",
     content: [
       "Eres la persona a la que todos llaman cuando las cosas se complican. Resuelves las crisis familiares, sostienes las metas laborales, organizas los detalles y nunca dejas caer una sola pelota en el aire. Desde afuera, todos admiran tu aparente temple de acero.",
       "Pero a puerta cerrada, cuando las luces se apagan, sientes un agotamiento que ningún fin de semana de sueño logra reparar. Es el cansancio profundo de quien nunca se ha sentido con el derecho de derrumbarse, de mostrar vulnerabilidad o de pedir que alguien más se haga cargo.",

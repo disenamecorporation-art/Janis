@@ -163,7 +163,8 @@ class DatabaseService {
   }
 
   private initDatabase() {
-    if (!localStorage.getItem(STORAGE_KEYS.POSTS)) {
+    const currentStoredPosts = localStorage.getItem(STORAGE_KEYS.POSTS);
+    if (!currentStoredPosts || currentStoredPosts.includes('/src/assets/images/')) {
       localStorage.setItem(STORAGE_KEYS.POSTS, JSON.stringify(INITIAL_POSTS));
     }
     if (!localStorage.getItem(STORAGE_KEYS.APPOINTMENTS)) {
