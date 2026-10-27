@@ -47,10 +47,22 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'Terapia Individual', href: '#individual', route: '/' },
     { name: 'Terapia de Pareja', href: '#pareja', route: '/' },
     { name: 'Planes', href: '#planes', route: '/' },
+    { name: 'Formulario', href: '/formulario', isRoute: true },
     { name: 'Blog', href: '/blog', isRoute: true },
     { name: 'Sobre mí', href: '#sobre-mi', route: '/' },
     { name: 'Contacto', href: '#contacto', route: '/' },
   ];
+
+  const handleAgendarAction = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (location.pathname === '/formulario') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setIsOpen(false);
+      return;
+    }
+    navigate('/formulario');
+    setIsOpen(false);
+  };
 
   const handleNavClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
     if (link.isRoute) return;
@@ -78,7 +90,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const isCurrentActive = (link: typeof navLinks[0]) => {
-    if (link.isRoute && location.pathname.startsWith('/blog')) {
+    if (link.isRoute && location.pathname === link.href) {
+      return true;
+    }
+    if (link.isRoute && link.href === '/blog' && location.pathname.startsWith('/blog')) {
       return true;
     }
     if (location.pathname === '/' && link.name === 'Inicio' && !location.hash) {
@@ -195,7 +210,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Agendar Cita Button */}
             <button
               type="button"
-              onClick={onOpenAgendar}
+              onClick={handleAgendarAction}
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white text-xs md:text-sm font-semibold btn-primary-gradient shadow-lg hover:shadow-xl whitespace-nowrap cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
@@ -206,7 +221,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile buttons */}
           <div className="flex sm:hidden items-center gap-2">
             <button
-              onClick={onOpenAgendar}
+              onClick={handleAgendarAction}
               className="inline-flex items-center justify-center p-2.5 rounded-full text-white btn-primary-gradient shadow-md cursor-pointer"
               aria-label="Agendar cita"
             >
@@ -301,11 +316,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
 
             <button
-              onClick={() => {
-                setIsOpen(false);
-                onOpenAgendar?.();
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full text-white text-sm font-semibold btn-primary-gradient shadow-md"
+              onClick={handleAgendarAction}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full text-white text-sm font-semibold btn-primary-gradient shadow-md cursor-pointer"
             >
               <span>Agendar cita en el sistema</span>
             </button>

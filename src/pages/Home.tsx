@@ -7,6 +7,7 @@ import { AboutJanisSection } from '../components/AboutJanisSection';
 import { MonthlyPlansSection } from '../components/MonthlyPlansSection';
 import { GuideBannerSection } from '../components/GuideBannerSection';
 import { HomeBlogSection } from '../components/HomeBlogSection';
+import { IntakeFormSection } from '../components/IntakeFormSection';
 import { PoliciesSection } from '../components/PoliciesSection';
 import { FinalCtaSection } from '../components/FinalCtaSection';
 import { PayPalCheckoutModal, CheckoutItem } from '../components/PayPalCheckoutModal';
@@ -28,16 +29,25 @@ export const Home: React.FC<HomeProps> = ({ onOpenBooking }) => {
     setIsModalOpen(false);
   };
 
+  const scrollToFormulario = () => {
+    const el = document.getElementById('formulario');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      onOpenBooking?.('Terapia Individual');
+    }
+  };
+
   return (
     <main className="w-full">
       {/* 1. Hero */}
-      <HeroSection onAgendarClick={() => onOpenBooking?.('Terapia Individual')} />
+      <HeroSection onAgendarClick={scrollToFormulario} />
 
       {/* 2. El peso invisible de tener que ser siempre la fuerte */}
       <IndividualTherapySection />
 
       {/* 3. Terapia de Pareja */}
-      <CouplesTherapySection onAgendarClick={() => onOpenBooking?.('Terapia de Pareja')} />
+      <CouplesTherapySection onAgendarClick={scrollToFormulario} />
 
       {/* 4. Resultados Clínicos */}
       <ClinicalResultsSection />
@@ -54,10 +64,13 @@ export const Home: React.FC<HomeProps> = ({ onOpenBooking }) => {
       {/* 8. Desde el blog */}
       <HomeBlogSection />
 
-      {/* 9. Políticas de Agendamiento y Respeto Mutuo */}
+      {/* 9. Formulario Propio Clínico y Confidencial */}
+      <IntakeFormSection />
+
+      {/* 10. Políticas de Agendamiento y Respeto Mutuo */}
       <PoliciesSection />
 
-      {/* 10. CTA Final */}
+      {/* 11. CTA Final */}
       <FinalCtaSection />
 
       {/* PayPal Checkout Modal */}

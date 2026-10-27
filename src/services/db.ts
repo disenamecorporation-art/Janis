@@ -34,12 +34,79 @@ export interface Appointment {
   userId?: string;
 }
 
+export interface IntakeFormSubmission {
+  id: string;
+  email: string;
+  nombre: string;
+  apellidos: string;
+  edad: string;
+  fechaNacimiento: string;
+  horaNacimiento: string;
+  lugarNacimiento: string;
+  ocupacion: string;
+  paisResidencia: string;
+  tienePareja: string;
+  sexo: string;
+  identificacionSexual: string;
+  nivelEducativo: string;
+  hijosCuantos: string;
+  conQuienesVive: string;
+  profesaReligion: string;
+  condicionMedicaMedicamentos: string;
+  asistidoTerapiaAnterioridad: string;
+  situacionEstresanteReciente: string;
+  comoSeSienteHoy: string;
+  motivoAtencionPsicologica: string;
+  sentimientoAlHablarTema: string;
+  areasAfectadasComo: string;
+  intensidadDel1Al10: number;
+  actividadAfrontarEstrategia: string;
+  expectativasAcompanamiento: string;
+  createdAt: string;
+  reviewed?: boolean;
+}
+
 const STORAGE_KEYS = {
   USERS: 'janis_users_db',
   CURRENT_USER: 'janis_current_user',
   APPOINTMENTS: 'janis_appointments_db',
   POSTS: 'janis_blog_posts_db',
+  INTAKE_FORMS: 'janis_intake_forms_db',
 };
+
+const DEFAULT_INTAKE_SUBMISSIONS: IntakeFormSubmission[] = [
+  {
+    id: 'form-sample-01',
+    email: 'mariana.silva@email.com',
+    nombre: 'Mariana',
+    apellidos: 'Silva Mendoza',
+    edad: '32',
+    fechaNacimiento: '1994-05-18',
+    horaNacimiento: '08:45 AM',
+    lugarNacimiento: 'Caracas, Venezuela',
+    ocupacion: 'Arquitecta / Diseñadora',
+    paisResidencia: 'Venezuela',
+    tienePareja: 'Si',
+    sexo: 'Femenino',
+    identificacionSexual: 'Heterosexual',
+    nivelEducativo: 'Profesional',
+    hijosCuantos: 'No tengo hijos',
+    conQuienesVive: 'Vivo con mi pareja y mi gato',
+    profesaReligion: 'Católica no practicante, más enfocada en espiritualidad y meditación',
+    condicionMedicaMedicamentos: 'Bruxismo e insomnio ocasional. No tomo medicamentos psiquiátricos, solo suplemento de magnesio.',
+    asistidoTerapiaAnterioridad: 'Sí, hace 3 años fui a terapia cognitivo conductual. Valoré mucho el espacio seguro de desahogo, pero sentí que se quedó en lo racional y no profundizó en la sensación física de ansiedad en mi cuerpo.',
+    situacionEstresanteReciente: 'Ascenso laboral con alta carga horaria y reciente mudanza de departamento.',
+    comoSeSienteHoy: 'Con el pecho apretado y sensación constante de cansancio mental aunque haya dormido 8 horas.',
+    motivoAtencionPsicologica: 'Necesito regular mi sistema nervioso, dejar de exigirme perfección constante y aprender a poner límites firmes sin culpa a mi familia y jefes.',
+    sentimientoAlHablarTema: 'Siento alivio pero a la vez ganas de llorar por haber sostenido tanto durante tanto tiempo.',
+    areasAfectadasComo: 'En lo laboral me sobrecargo; en lo afectivo estoy más irritable con mi pareja y en lo social me he aislado los fines de semana.',
+    intensidadDel1Al10: 8,
+    actividadAfrontarEstrategia: 'Hago yoga suave y caminatas cuando el tiempo me lo permite. Me relaja momentáneamente pero el patrón de alerta regresa rápido.',
+    expectativasAcompanamiento: 'Comprender qué le pasa a mi cuerpo, herramientas somáticas para momentos de desborde y un acompañamiento empático y sin juicios.',
+    createdAt: '2026-10-24T15:20:00.000Z',
+    reviewed: false,
+  },
+];
 
 const DEFAULT_APPOINTMENTS: Appointment[] = [
   {
@@ -105,6 +172,9 @@ class DatabaseService {
     if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
       localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(DEFAULT_USERS));
     }
+    if (!localStorage.getItem(STORAGE_KEYS.INTAKE_FORMS)) {
+      localStorage.setItem(STORAGE_KEYS.INTAKE_FORMS, JSON.stringify(DEFAULT_INTAKE_SUBMISSIONS));
+    }
   }
 
   /**
@@ -152,8 +222,46 @@ class DatabaseService {
         localStorage.setItem(STORAGE_KEYS.POSTS, JSON.stringify(mappedPosts));
         this.dispatchChangeEvent('posts');
       }
+
+      // 3. Sync intake forms
+      const { data: intakeData } = await supabase.from('intake_forms').select('*');
+      if (intakeData && intakeData.length > 0) {
+        const mappedIntake: IntakeFormSubmission[] = intakeData.map((row: any) => ({
+          id: row.id,
+          email: row.email,
+          nombre: row.nombre,
+          apellidos: row.apellidos,
+          edad: row.edad,
+          fechaNacimiento: row.fecha_nacimiento,
+          horaNacimiento: row.hora_nacimiento,
+          lugarNacimiento: row.lugar_nacimiento,
+          ocupacion: row.ocupacion,
+          paisResidencia: row.pais_residencia,
+          tienePareja: row.tiene_pareja,
+          sexo: row.sexo,
+          identificacionSexual: row.identificacion_sexual,
+          nivelEducativo: row.nivel_educativo,
+          hijosCuantos: row.hijos_cuantos,
+          conQuienesVive: row.con_quienes_vive,
+          profesaReligion: row.profesa_religion,
+          condicionMedicaMedicamentos: row.condicion_medica,
+          asistidoTerapiaAnterioridad: row.asistido_terapia,
+          situacionEstresanteReciente: row.situacion_estresante,
+          comoSeSienteHoy: row.como_se_siente,
+          motivoAtencionPsicologica: row.motivo_atencion,
+          sentimientoAlHablarTema: row.sentimiento_hablar,
+          areasAfectadasComo: row.areas_afectadas,
+          intensidadDel1Al10: Number(row.intensidad),
+          actividadAfrontarEstrategia: row.actividad_afrontar,
+          expectativasAcompanamiento: row.expectativas,
+          createdAt: row.created_at || new Date().toISOString(),
+          reviewed: row.reviewed || false,
+        }));
+        localStorage.setItem(STORAGE_KEYS.INTAKE_FORMS, JSON.stringify(mappedIntake));
+        this.dispatchChangeEvent('intake');
+      }
     } catch {
-      // Fallback a localStorage
+      // Fallback si no hay conexión
     }
   }
 
@@ -511,10 +619,222 @@ class DatabaseService {
     return true;
   }
 
+  /* ------------------- INTAKE FORMS (CUESTIONARIOS CLÍNICOS) ------------------- */
+  getIntakeSubmissions(): IntakeFormSubmission[] {
+    const raw = localStorage.getItem(STORAGE_KEYS.INTAKE_FORMS);
+    if (!raw) return DEFAULT_INTAKE_SUBMISSIONS;
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : DEFAULT_INTAKE_SUBMISSIONS;
+    } catch {
+      return DEFAULT_INTAKE_SUBMISSIONS;
+    }
+  }
+
+  saveIntakeSubmission(submissionData: Omit<IntakeFormSubmission, 'id' | 'createdAt'>): IntakeFormSubmission {
+    const list = this.getIntakeSubmissions();
+    const newSubmission: IntakeFormSubmission = {
+      ...submissionData,
+      id: `intake-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      createdAt: new Date().toISOString(),
+      reviewed: false,
+    };
+
+    list.unshift(newSubmission);
+    localStorage.setItem(STORAGE_KEYS.INTAKE_FORMS, JSON.stringify(list));
+
+    if (isSupabaseConfigured()) {
+      safeExec(
+        supabase.from('intake_forms').insert({
+          id: newSubmission.id,
+          email: newSubmission.email,
+          nombre: newSubmission.nombre,
+          apellidos: newSubmission.apellidos,
+          edad: newSubmission.edad,
+          fecha_nacimiento: newSubmission.fechaNacimiento,
+          hora_nacimiento: newSubmission.horaNacimiento,
+          lugar_nacimiento: newSubmission.lugarNacimiento,
+          ocupacion: newSubmission.ocupacion,
+          pais_residencia: newSubmission.paisResidencia,
+          tiene_pareja: newSubmission.tienePareja,
+          sexo: newSubmission.sexo,
+          identificacion_sexual: newSubmission.identificacionSexual,
+          nivel_educativo: newSubmission.nivelEducativo,
+          hijos_cuantos: newSubmission.hijosCuantos,
+          con_quienes_vive: newSubmission.conQuienesVive,
+          profesa_religion: newSubmission.profesaReligion,
+          condicion_medica: newSubmission.condicionMedicaMedicamentos,
+          asistido_terapia: newSubmission.asistidoTerapiaAnterioridad,
+          situacion_estresante: newSubmission.situacionEstresanteReciente,
+          como_se_siente: newSubmission.comoSeSienteHoy,
+          motivo_atencion: newSubmission.motivoAtencionPsicologica,
+          sentimiento_hablar: newSubmission.sentimientoAlHablarTema,
+          areas_afectadas: newSubmission.areasAfectadasComo,
+          intensidad: newSubmission.intensidadDel1Al10,
+          actividad_afrontar: newSubmission.actividadAfrontarEstrategia,
+          expectativas: newSubmission.expectativasAcompanamiento,
+          created_at: newSubmission.createdAt,
+        })
+      );
+    }
+
+    this.dispatchChangeEvent('intake');
+    return newSubmission;
+  }
+
+  deleteIntakeSubmission(id: string): boolean {
+    let list = this.getIntakeSubmissions();
+    list = list.filter((item) => item.id !== id);
+    localStorage.setItem(STORAGE_KEYS.INTAKE_FORMS, JSON.stringify(list));
+
+    if (isSupabaseConfigured()) {
+      safeExec(supabase.from('intake_forms').delete().eq('id', id));
+    }
+
+    this.dispatchChangeEvent('intake');
+    return true;
+  }
+
+  toggleIntakeReviewed(id: string): boolean {
+    const list = this.getIntakeSubmissions();
+    const index = list.findIndex((item) => item.id === id);
+    if (index === -1) return false;
+
+    list[index].reviewed = !list[index].reviewed;
+    localStorage.setItem(STORAGE_KEYS.INTAKE_FORMS, JSON.stringify(list));
+    this.dispatchChangeEvent('intake');
+    return true;
+  }
+
   /* ------------------- EVENT DISPATCHER ------------------- */
-  private dispatchChangeEvent(type: 'auth' | 'appointments' | 'posts') {
+  private dispatchChangeEvent(type: 'auth' | 'appointments' | 'posts' | 'intake') {
     window.dispatchEvent(new CustomEvent(`janis_db_${type}_change`));
   }
 }
 
 export const dbService = new DatabaseService();
+
+/**
+ * Genera el documento clínico formateado y listo para ser descargado o impreso por Janis
+ */
+export function generateIntakeDocumentText(sub: IntakeFormSubmission): string {
+  const formattedDate = new Date(sub.createdAt).toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  return `================================================================================
+PSICOTERAPIA CON JANIS - FICHA DE CUESTIONARIO CLÍNICO INICIAL
+================================================================================
+Psicóloga: Janis Niño Vásquez
+Especialidad: Trauma Somático, Regulación Emocional y Vínculos Sanos
+ID de Registro: ${sub.id}
+Fecha y hora de envío: ${formattedDate}
+Estado: ${sub.reviewed ? 'REVISADO' : 'PENDIENTE DE EVALUACIÓN'}
+================================================================================
+
+DATOS PERSONALES Y DEMOGRÁFICOS
+--------------------------------------------------------------------------------
+1.  Email:
+    ${sub.email}
+
+2.  Nombre:
+    ${sub.nombre}
+
+3.  Apellidos:
+    ${sub.apellidos}
+
+4.  Edad:
+    ${sub.edad} años
+
+5.  Fecha de nacimiento:
+    ${sub.fechaNacimiento}
+
+6.  Hora de nacimiento:
+    ${sub.horaNacimiento}
+
+7.  Lugar de nacimiento:
+    ${sub.lugarNacimiento}
+
+8.  Ocupación:
+    ${sub.ocupacion}
+
+9.  País de residencia:
+    ${sub.paisResidencia}
+
+10. ¿Tienes pareja?:
+    ${sub.tienePareja}
+
+11. Sexo:
+    ${sub.sexo}
+
+12. Identificación sexual:
+    ${sub.identificacionSexual}
+
+13. Nivel educativo:
+    ${sub.nivelEducativo}
+
+14. ¿Tienes hijos? cuántos?:
+    ${sub.hijosCuantos}
+
+15. ¿Con quiénes vive actualmente?:
+    ${sub.conQuienesVive}
+
+16. ¿Profesa alguna religión?:
+    ${sub.profesaReligion}
+
+
+HISTORIAL MÉDICO Y ANTECEDENTES TERAPÉUTICOS
+--------------------------------------------------------------------------------
+17. ¿Ha tenido ultimamente alguna condición médica? ¿De ser así está tomando algún medicamento?:
+    ${sub.condicionMedicaMedicamentos}
+
+18. ¿Has asistido a terapia con anterioridad? de ser así ¿qué valoraste más sobre las sesiones y qué pudiera mejorar?:
+    ${sub.asistidoTerapiaAnterioridad}
+
+19. ¿Has vivido recientemente alguna situación estresante? Desastres naturales, pérdida de algún familiar, diagnóstico de alguna enfermedad, migración...:
+    ${sub.situacionEstresanteReciente}
+
+
+EVALUACIÓN CLÍNICA ACTUAL Y ESTADO EMOCIONAL
+--------------------------------------------------------------------------------
+20. ¿Cómo se siente hoy?:
+    ${sub.comoSeSienteHoy}
+
+21. ¿Qué le motivó a tomar atención psicológica en este momento?:
+    ${sub.motivoAtencionPsicologica}
+
+22. ¿Cómo se siente al hablar de este tema?:
+    ${sub.sentimientoAlHablarTema}
+
+23. ¿En qué áreas de tu vida social, afectiva, laboral, consideras que te está afectando? y ¿cómo te está afectando?:
+    ${sub.areasAfectadasComo}
+
+24. ¿Del 1 al 10 que intensidad te parece que tiene el día de hoy el tema que quieres ver en sesiones?:
+    [ ${sub.intensidadDel1Al10} / 10 ] - ${
+      sub.intensidadDel1Al10 <= 3
+        ? 'Baja intensidad'
+        : sub.intensidadDel1Al10 <= 6
+        ? 'Intensidad moderada'
+        : 'Muy alta intensidad'
+    }
+
+
+AFRONTAMIENTO Y EXPECTATIVAS TERAPÉUTICAS
+--------------------------------------------------------------------------------
+25. ¿Haz realizado alguna actividad para afrontar estos temas? alguna estrategia te ha funcionado?:
+    ${sub.actividadAfrontarEstrategia}
+
+26. ¿Qué expectativas tienes sobre el acompañamiento terapéutico y las sesiones?:
+    ${sub.expectativasAcompanamiento}
+
+================================================================================
+CONFIDENCIALIDAD PROFESIONAL:
+Este documento contiene datos clínicos sensibles y confidenciales bajo el
+resguardo exclusivo de Psicoterapia con Janis.
+================================================================================
+`;
+}

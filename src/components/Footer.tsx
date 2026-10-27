@@ -9,6 +9,7 @@ export const Footer: React.FC = () => {
 
   const navLinks = [
     { name: 'Inicio', href: '#hero' },
+    { name: 'Formulario', href: '/formulario', isRoute: true },
     { name: 'Terapia Individual', href: '#individual' },
     { name: 'Terapia de Pareja', href: '#pareja' },
     { name: 'Planes', href: '#planes' },

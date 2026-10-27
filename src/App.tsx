@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { BlogList } from './pages/BlogList';
 import { BlogPostDetail } from './pages/BlogPostDetail';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { FormularioPage } from './pages/FormularioPage';
 import { BookingModal } from './components/BookingModal';
 import { AuthModal } from './components/AuthModal';
 import { UserDashboardModal } from './components/UserDashboardModal';
@@ -61,6 +62,7 @@ export default function App() {
                 />
               } 
             />
+            <Route path="/formulario" element={<FormularioPage />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogPostDetail />} />
             <Route path="/admin" element={<AdminDashboard />} />

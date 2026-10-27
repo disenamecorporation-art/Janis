@@ -20,6 +20,10 @@
   .font-script {
     font-family: var(--font-script);
   }
+
+  .font-montserrat {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif !important;
+  }
 }
 
 /* Super Glassmorphism Utilities */
